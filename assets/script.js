@@ -43,4 +43,3 @@ const lig_4 = {
 
 //Lucas
 
-
