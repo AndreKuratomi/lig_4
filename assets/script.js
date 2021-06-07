@@ -33,6 +33,18 @@ const lig_4 = {
 
 //Gabriel
 
+const inputNames = document.getElementById('inputNames');
+const submit = document.getElementById('submit');
+let jogadorUm = document.getElementById('inputUm').value;
+let jogadorDois = document.getElementById('inputDois').value;
+let playernameOne = document.getElementsByClassName('playername--one');
+let playernameTwo = document.getElementsByClassName('playername--two');
+playernameOne.innerText = jogadorUm;
+playernameTwo.innerText = jogadorDois;
+
+submit.addEventListener('click', )
+
+
 
 
 
