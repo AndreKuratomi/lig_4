@@ -27,8 +27,7 @@ header{
 #inputNames{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    
+    align-items: center;  
 }
 
 #inputUm{
@@ -55,6 +54,10 @@ header{
     background-color: var(--dark_green);
     color: var(--light_green);
     margin: 10px;
+}
+
+.hidden{
+    display: none;
 }
 
 /* Lucas */
