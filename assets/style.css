@@ -1,0 +1,37 @@
+:root {
+    --yellow: #FDD04F;
+    --dark_green: #13333B;
+    --green: #47C5B4;
+    --light_green: #BEDACD;
+    --blue: #136A81;
+    --col_width: 50px;
+}
+
+/* Reset */
+
+* {
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-sizing: border-box;
+}
+
+/* André */
+
+
+
+/* Gabriel */
+
+
+
+/* Lucas */
+
+div.game_container {
+    display: flex;
+}
+
+div.game__col {
+    width: var(--col_width);
+    height: 100px;
+    background-color: red;
+}
