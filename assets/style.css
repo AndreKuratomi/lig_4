@@ -30,11 +30,13 @@ body, html {
 /* Gabriel */
 header{
     text-align: center;
+    margin-top: 20px;
 }
 #inputNames{
     display: flex;
     flex-direction: column;
     align-items: center;  
+    margin-top: 100px;
 }
 
 #inputUm{
@@ -63,16 +65,15 @@ header{
     margin: 10px;
 }
 
-form#inputNames.hidden{
-    display: none;
-}
-
-/* Lucas */
 
 div.container {
     width: calc(7 * var(--col_width));
     margin: 0 auto;
     position: relative;
+}
+
+form#inputNames.hidden, div.container.hidden{
+    display: none;
 }
 
 div.game_container {
