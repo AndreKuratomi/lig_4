@@ -130,7 +130,7 @@ i.fa-chevron-down {
     color: var(--dark_green);
     position: absolute;
     top: 0;
-    left: 0;
+    left: calc(var(--col_width)*3);
     animation: all 0.3s ease;
 }
 
@@ -310,7 +310,9 @@ div.disk--blank::after {
 
 
 /* André */
-
+i.fa-chevron-down-color2 {
+    color: var(--green);
+}
 
 div.game_container::before, 
 div.game_container::after {
@@ -318,11 +320,18 @@ div.game_container::after {
 }
 
 div.invictu {
-    background-color: #AAA;
+    background-color: var(--yellow);
+    border-radius: 15%;
     color: #000;
     font-weight: bold;
     text-transform: uppercase;
-    width: 25vw;
+    position: absolute;
+    top: 20rem;
+    left: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 60vw;
     height: 10vh;
 }
 span#majestic {
@@ -331,13 +340,10 @@ span#majestic {
 }
 
 @media (min-width: 768px) {
-    div.game_container::before,
-    div.game_container::after {
-        display: block;
-        background-color: #333;
-        width: 1rem;
-        height: 110%;
-        border-top-left-radius: 10%;
-        border-top-right-radius: 10%;
+    div.game_container {
+        border-left: 1rem solid #00F;
+        border-right: 1rem solid #00F;
+        border-top-left-radius: 2%;
+        border-top-right-radius: 2%;
     }
 }
