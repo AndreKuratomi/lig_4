@@ -9,6 +9,7 @@ const lig_4 = {
         this.matrix = this.make_matrix()
         this.animations.start()
         this.disks.start()
+        this.input.start()
     },
 
 // André,
@@ -17,7 +18,28 @@ const lig_4 = {
 
 
 // Gabriel,
+    input: {
+        get_names() {
+            const inputNames = document.getElementById('inputNames');
+            const submit = document.getElementById('submit');
 
+            submit.addEventListener('click', function(){
+                const jogadorUm = document.getElementById('inputUm').value;
+                const jogadorDois = document.getElementById('inputDois').value;
+                const playernameOne = document.querySelector('div.player__name--one');
+                const playernameTwo = document.querySelector('div.player__name--two');
+                const container = document.querySelector("div.container");
+
+                playernameOne.innerText = jogadorUm;
+                playernameTwo.innerText = jogadorDois;
+                inputNames.classList.add('hidden');
+                container.classList.remove('hidden');
+            })
+        },
+        start() {
+            this.get_names()
+        }
+    },
 
 
 
@@ -134,26 +156,7 @@ setTimeout(winner(jogador2), 5000);
 
 
 
-
-
 //Gabriel
-
-let inputNames = document.getElementById('inputNames');
-const submit = document.getElementById('submit');
-
-submit.addEventListener('click', function(){
-    console.log('teste');
-    let jogadorUm = document.getElementById('inputUm').value;
-    let jogadorDois = document.getElementById('inputDois').value;
-    let playernameOne = document.querySelector('div.player__name--one');
-    let playernameTwo = document.querySelector('div.player__name--two');
-    playernameOne.innerText = jogadorUm;
-    playernameTwo.innerText = jogadorDois;
-    inputNames.classList.add('hidden');
-    let container = document.querySelector("div.container");
-    container.classList.remove('hidden');
-    
-});
 
 
 
