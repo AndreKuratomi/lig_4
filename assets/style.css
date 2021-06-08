@@ -2,7 +2,7 @@
     --yellow: #FDD04F;
     --dark_green: #13333B;
     --green: #47C5B4;
-    --light_green: #BEDACD;
+    --light_green: #BEDACD94;
     --blue: #136A81;
     --col_width: 50px;
 }
@@ -14,7 +14,8 @@
     margin: 0;
     border: none;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body, html {
@@ -83,9 +84,12 @@ div.game_container {
 
 div.game__col {
     width: var(--col_width);
-    height: 300px;
+    height: calc(6 * var(--col_width) + 2rem - 8px);
     background-color: white;
     border: 1px solid var(--light_green);
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 div#col_0 {
@@ -104,10 +108,11 @@ div.player {
 }
 
 div.player__name {
-    padding: 0.8rem 2rem;
+    padding: 0.8rem 2.3rem;
     border-radius: 5rem;
     color: white;
     margin: 0 0.5rem;
+    font-size: 0.75rem;
 }
 
 div.player__name--one {
@@ -134,7 +139,7 @@ div.button_area {
     display: grid;
     width: 130px;
     margin: 0 auto;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     grid-template: auto / 50% 50%;
     grid-template-areas: 'left right'
                          'down down';
@@ -176,8 +181,28 @@ div.button--left {
 div.button--left::before {
     content: '\f053';
     top: 50%;
-    left: -1rem;
+    left: -0.8rem;
     transform: translate(-50%, -50%);
+}
+
+div.animate--left {
+    animation: click_left 0.3s;
+}
+
+div.animate--left:active {
+    margin-right: 1rem;
+}
+
+@keyframes click_left {
+    0% {
+        margin-right: 0;
+    }
+    20%, 80% {
+        margin-right: 0.3rem;
+    }
+    100% {
+        margin-right: 0;
+    }
 }
 
 div.button--right {
@@ -187,8 +212,24 @@ div.button--right {
 
 div.button--right::after {
     content: '\f054';
-    transform: translate(5%, -10%);
-    right: -1.5rem;
+    transform: translate(0, -10%);
+    right: -1.4rem;
+}
+
+div.animate--right {
+    animation: click_right 0.3s;
+}
+
+@keyframes click_right {
+    0% {
+        margin-left: 0;
+    }
+    20%, 80% {
+        margin-left: 0.3rem;
+    }
+    100% {
+        margin-left: 0;
+    }
 }
 
 div.button--down {
@@ -201,7 +242,23 @@ div.button--down {
 div.button--down::after {
     content: '\f078';
     transform: translateY(50%);
-    bottom: -1rem;
+    bottom: -0.8rem;
+}
+
+div.animate--down {
+    animation: click_down 0.3s;
+}
+
+@keyframes click_down {
+    0% {
+        margin-top: 0;
+    }
+    20%, 80% {
+        margin-top: 0.3rem;
+    }
+    100% {
+        margin-top: 0;
+    }
 }
 
 button.reset__button {
@@ -213,4 +270,39 @@ button.reset__button {
     background-color: white;
     border-radius: 15px 15px 0 0;
     cursor: pointer;
+}
+
+div.blank_container {
+    margin-bottom: 1rem;
+    color: var(--light_green);
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+}
+
+div.blank_container p {
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.7rem;
+}
+
+div.disk--blank {
+    width: 37px;
+    height: 37px;
+    margin: 10px auto 0;
+    background-color: var(--yellow);
+    border-radius: 50%;
+    position: relative;
+}
+
+div.disk--blank::after {
+    content: '';
+    width: 45px;
+    height: 10px;
+    background-color: white;
+    display: block;
+    position: absolute;
+    left: -4px;
+    top: -10px;
+    z-index: 100;
 }
