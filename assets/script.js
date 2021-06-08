@@ -12,13 +12,20 @@ const lig_4 = {
     },
     // André,
 
-    func1() {},
 
-    // Gabriel,
+// André,
+//Funções que alterem a cor da seta de acordo com a do botão;
+const seta = document.querySelector(div.fa-sort-down);
+const button1 = document.querySelector(div.player__name--one);
+const button2 = document.querySelector(div.player__name--two);
 
-    func2() {},
+button1.addEventListener('click', func1() {
+    seta.style.color = 'darkGreen';
+});
 
-    // Lucas
+button2.addEventListener('click', func2() {
+    seta.style.color = 'green';
+});
 
     animations: {
         buttons: {
@@ -86,6 +93,22 @@ const lig_4 = {
 
 
 //Gabriel
+
+const inputNames = document.getElementById('inputNames');
+const submit = document.getElementById('submit');
+
+submit.addEventListener('click', function(){
+
+    let jogadorUm = document.getElementById('inputUm').value;
+    let jogadorDois = document.getElementById('inputDois').value;
+    let playernameOne = document.getElementsByClassName('playername--one');
+    let playernameTwo = document.getElementsByClassName('playername--two');
+    playernameOne.innerText = jogadorUm;
+    playernameTwo.innerText = jogadorDois;
+    inputNames.className.add('hidden');
+
+});
+
 
 
 

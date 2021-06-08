@@ -28,8 +28,44 @@ body, html {
 
 
 /* Gabriel */
+header{
+    text-align: center;
+}
+#inputNames{
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+}
 
+#inputUm{
+    font-size: 20px;
+    border: 1px solid var(--dark_green);
+    width: 200px;
+    background-color: var(--light_green);
+    margin: 10px;
+    color: var(--dark_green);
+}
 
+#inputDois{
+    font-size: 20px;
+    border: 1px solid var(--dark_green);
+    width: 200px;
+    background-color: var(--light_green);
+    margin: 10px;
+    color: var(--dark_green);
+}
+
+#submit{
+    height: 20px;
+    width: 200px;
+    background-color: var(--dark_green);
+    color: var(--light_green);
+    margin: 10px;
+}
+
+.hidden{
+    display: none;
+}
 
 /* Lucas */
 
