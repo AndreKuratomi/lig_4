@@ -306,3 +306,37 @@ div.disk--blank::after {
     top: -10px;
     z-index: 100;
 }
+
+
+/* André */
+
+
+div.game_container::before, 
+div.game_container::after {
+    display: none;
+}
+
+div.invictu {
+    background-color: #AAA;
+    color: #000;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 25vw;
+    height: 10vh;
+}
+span#majestic {
+    background-color: #F00;
+    text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+    div.game_container::before,
+    div.game_container::after {
+        display: block;
+        background-color: #333;
+        width: 1rem;
+        height: 110%;
+        border-top-left-radius: 10%;
+        border-top-right-radius: 10%;
+    }
+}
