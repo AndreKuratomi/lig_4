@@ -2,7 +2,7 @@
     --yellow: #FDD04F;
     --dark_green: #13333B;
     --green: #47C5B4;
-    --light_green: #BEDACD;
+    --light_green: #BEDACD94;
     --blue: #136A81;
     --col_width: 50px;
 }
@@ -14,6 +14,13 @@
     margin: 0;
     border: none;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body, html {
+    width: 100%;
+    background-color: var(--yellow);
 }
 
 /* André */
@@ -21,17 +28,281 @@
 
 
 /* Gabriel */
+header{
+    text-align: center;
+}
+#inputNames{
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+}
 
+#inputUm{
+    font-size: 20px;
+    border: 1px solid var(--dark_green);
+    width: 200px;
+    background-color: var(--light_green);
+    margin: 10px;
+    color: var(--dark_green);
+}
 
+#inputDois{
+    font-size: 20px;
+    border: 1px solid var(--dark_green);
+    width: 200px;
+    background-color: var(--light_green);
+    margin: 10px;
+    color: var(--dark_green);
+}
+
+#submit{
+    height: 20px;
+    width: 200px;
+    background-color: var(--dark_green);
+    color: var(--light_green);
+    margin: 10px;
+}
+
+form#inputNames.hidden{
+    display: none;
+}
 
 /* Lucas */
 
+div.container {
+    width: calc(7 * var(--col_width));
+    margin: 0 auto;
+    position: relative;
+}
+
 div.game_container {
     display: flex;
+    width: 100%;
+    justify-content: center;
+    padding-top: 1.75rem;
 }
 
 div.game__col {
     width: var(--col_width);
-    height: 100px;
-    background-color: red;
+    height: calc(6 * var(--col_width) + 2rem - 8px);
+    background-color: white;
+    border: 1px solid var(--light_green);
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+div#col_0 {
+    border-radius: 10px 0 0 10px;
+}
+
+div#col_6 {
+    border-radius: 0 10px 10px 0;
+}
+
+div.player {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 1.2rem;
+}
+
+div.player__name {
+    padding: 0.8rem 2.3rem;
+    border-radius: 5rem;
+    color: white;
+    margin: 0 0.5rem;
+    font-size: 0.75rem;
+}
+
+div.player__name--one {
+    background-color: var(--dark_green);
+}
+
+div.player__name--two {
+    background-color: var(--green);
+}
+
+i.fa-chevron-down {
+    font-size: 1.5rem;
+    margin: 0.2rem calc(calc(var(--col_width) - 21px) / 2);
+    color: var(--dark_green);
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: all 0.3s ease;
+}
+
+div.button_area {
+    position: relative;
+    justify-content: space-between;
+    display: grid;
+    width: 130px;
+    margin: 0 auto;
+    margin-top: 1.5rem;
+    grid-template: auto / 50% 50%;
+    grid-template-areas: 'left right'
+                         'down down';
+    place-items: center;
+}
+
+div.button {
+    width: 100%;
+    max-width: 35px;
+    height: 30px;
+    border: 1px white solid;
+    background-color: var(--blue);
+    position: relative;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    flex: 50%;
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+
+div.button::before, div.button::after {
+    content: '';
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    position: absolute;
+    font-size: 2rem;
+    color: var(--blue);
+    text-shadow: 
+        1px 0 0 white,  
+        1px 1px 0 white, 
+        -1px -1px 0 white, 
+        -1px 0 0 white;
+}
+
+div.button--left {
+    border-radius: 5px 15px 15px 5px;
+    grid-area: left;
+}
+
+div.button--left::before {
+    content: '\f053';
+    top: 50%;
+    left: -0.8rem;
+    transform: translate(-50%, -50%);
+}
+
+div.animate--left {
+    animation: click_left 0.3s;
+}
+
+div.animate--left:active {
+    margin-right: 1rem;
+}
+
+@keyframes click_left {
+    0% {
+        margin-right: 0;
+    }
+    20%, 80% {
+        margin-right: 0.3rem;
+    }
+    100% {
+        margin-right: 0;
+    }
+}
+
+div.button--right {
+    border-radius: 15px 5px 5px 15px;
+    grid-area: right;
+}
+
+div.button--right::after {
+    content: '\f054';
+    transform: translate(0, -10%);
+    right: -1.4rem;
+}
+
+div.animate--right {
+    animation: click_right 0.3s;
+}
+
+@keyframes click_right {
+    0% {
+        margin-left: 0;
+    }
+    20%, 80% {
+        margin-left: 0.3rem;
+    }
+    100% {
+        margin-left: 0;
+    }
+}
+
+div.button--down {
+    max-width: 30px;
+    height: 35px;
+    border-radius: 15px 15px 5px 5px;
+    grid-area: down;
+}
+
+div.button--down::after {
+    content: '\f078';
+    transform: translateY(50%);
+    bottom: -0.8rem;
+}
+
+div.animate--down {
+    animation: click_down 0.3s;
+}
+
+@keyframes click_down {
+    0% {
+        margin-top: 0;
+    }
+    20%, 80% {
+        margin-top: 0.3rem;
+    }
+    100% {
+        margin-top: 0;
+    }
+}
+
+button.reset__button {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    padding: 1rem 0;
+    background-color: white;
+    border-radius: 15px 15px 0 0;
+    cursor: pointer;
+}
+
+div.blank_container {
+    margin-bottom: 1rem;
+    color: var(--light_green);
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+}
+
+div.blank_container p {
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.7rem;
+}
+
+div.disk--blank {
+    width: 37px;
+    height: 37px;
+    margin: 10px auto 0;
+    background-color: var(--yellow);
+    border-radius: 50%;
+    position: relative;
+}
+
+div.disk--blank::after {
+    content: '';
+    width: 45px;
+    height: 10px;
+    background-color: white;
+    display: block;
+    position: absolute;
+    left: -4px;
+    top: -10px;
+    z-index: 100;
 }
