@@ -1,22 +1,54 @@
 const lig_4 = {
     player_1: '1',
     player_2: '2',
-    matrix: null,
-    make_matrix() {
-        return [...Array(6)].map( _ => [...Array(7)].map( _ => ' '))
+    column: 3,
+    matrix: {
+        path: null,
+        start() {
+            this.path = [...Array(6)].map( _ => [...Array(7)].map( _ => ' '))
+        }
     },
     start() {
-        this.matrix = this.make_matrix()
+        this.matrix.start()
         this.animations.start()
         this.disks.start()
         this.input.start()
+        this.controller.start()
     },
-
 // André,
+    controller: {
+        start() {
+            const button_area = document.querySelector('div.button_area')
+            const seta = document.querySelector('i.fa-chevron-down')
 
-
-
-
+            button_area.addEventListener('click', evt => {
+                const evt_target = evt.target;
+                let flag = false;
+                
+                if (evt_target.classList.contains('button--left')) {
+                    if (lig_4.column > 0) {
+                        lig_4.column -= 1;
+                        flag = true;
+                    }
+                }
+                if (evt_target.classList.contains('button--right')) {
+                    if (lig_4.column < 6) {
+                        lig_4.column += 1;
+                        flag = true;
+                    }
+                }
+                if (evt_target.classList.contains('button--down')) {
+                    seta.classList.toggle('fa-chevron-down-color2');
+                }
+                if (flag) {
+                    this.render(seta);
+                }
+            })
+        },
+        render(seta) {
+            seta.style.left = `${lig_4.column * 50}px`;
+        }
+    },
 // Gabriel,
     input: {
         get_names() {
@@ -40,11 +72,7 @@ const lig_4 = {
             this.get_names()
         }
     },
-
-
-
-
-animations: {
+    animations: {
     buttons: {
             start() {
                 const buton_area = document.querySelector('div.button_area')
@@ -102,61 +130,23 @@ animations: {
 
 
 //André
-//Função que altere a cor da seta de acordo com a do botão;
-const seta = document.querySelector('i.fa-chevron-down');
-
-
-
-//Função para alterar a seta e ativar a coluna;
-const button_area = document.querySelector('div.button_area');
-
-let column = 3;
-
-const render = () => {
-    seta.style.left = `${column * 50}px`;
-};
-
-button_area.addEventListener('click', evt => {
-    
-    const evt_target = evt.target;
-    let flag = false;
-    
-    if (evt_target.classList.contains('button--left')) {
-        if (column > 0) {
-            column -= 1;
-            flag = true;
-        }
-    }
-    if (evt_target.classList.contains('button--right')) {
-        if (column < 6) {
-            column += 1;
-            flag = true;
-        }
-    }
-    if (evt_target.classList.contains('button--down')) {
-        seta.classList.toggle('fa-chevron-down-color2');
-    }
-    if (flag === true) {
-        render();
-    }
-});
-
 
 //Mensagem de vitória:
-const winner = (player, classList) => {
-    const victory = document.querySelector('body');
-    const conquer = document.createElement('div');
-    conquer.classList = 'invictus';
-    conquer.classList.add(classList);
-    conquer.innerHTML = `${player} venceu!`;
-    victory.appendChild(conquer);
-};
 
-if ('lorem ipsum dolor') {
-    setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
-}
+// const winner = (player, classList) => {
+//     const victory = document.querySelector('body');
+//     const conquer = document.createElement('div');
+//     conquer.classList = 'invictus';
+//     conquer.classList.add(classList);
+//     conquer.innerHTML = `${player} venceu!`;
+//     victory.appendChild(conquer);
+// };
 
-setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
+// if ('lorem ipsum dolor') {
+//     setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
+// }
+
+// setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
 
 
 lig_4.start()

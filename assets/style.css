@@ -131,7 +131,7 @@ i.fa-chevron-down {
     position: absolute;
     top: 0;
     left: calc(var(--col_width)*3);
-    animation: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 div.button_area {
