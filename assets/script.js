@@ -88,19 +88,21 @@ const lig_4 = {
 
 //Gabriel
 
-const inputNames = document.getElementById('inputNames');
+let inputNames = document.getElementById('inputNames');
 const submit = document.getElementById('submit');
 
 submit.addEventListener('click', function(){
-
+    console.log('teste');
     let jogadorUm = document.getElementById('inputUm').value;
     let jogadorDois = document.getElementById('inputDois').value;
-    let playernameOne = document.getElementsByClassName('playername--one');
-    let playernameTwo = document.getElementsByClassName('playername--two');
+    let playernameOne = document.querySelector('div.player__name--one');
+    let playernameTwo = document.querySelector('div.player__name--two');
     playernameOne.innerText = jogadorUm;
     playernameTwo.innerText = jogadorDois;
-    inputNames.className.add('hidden');
-
+    inputNames.classList.add('hidden');
+    let container = document.querySelector("div.container");
+    container.classList.remove('hidden');
+    
 });
 
 

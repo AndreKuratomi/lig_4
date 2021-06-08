@@ -63,7 +63,7 @@ header{
     margin: 10px;
 }
 
-.hidden{
+form#inputNames.hidden{
     display: none;
 }
 
