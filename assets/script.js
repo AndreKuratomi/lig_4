@@ -42,13 +42,13 @@ const lig_4 = {
     },
 
 
-// Lucas
 
-    animations: {
-        buttons: {
+
+animations: {
+    buttons: {
             start() {
                 const buton_area = document.querySelector('div.button_area')
-
+                
                 buton_area.addEventListener('click', evt => {
                     const evt_target = evt.target
 
@@ -83,7 +83,7 @@ const lig_4 = {
             columns.forEach( (col, i) => {
                 const container = document.createElement('div')
                 const index = document.createElement('p')
-
+                
                 index.innerText = i + 1
                 container.appendChild(index)
                 container.classList.add('blank_container')
@@ -102,9 +102,64 @@ const lig_4 = {
 
 
 //André
+//Função que altere a cor da seta de acordo com a do botão;
+const seta = document.querySelector('i.fa-chevron-down');
 
 
 
+//Função para alterar a seta e ativar a coluna;
+const button_area = document.querySelector('div.button_area');
+
+let column = 3;
+
+const render = () => {
+    seta.style.left = `${column * 50}px`;
+};
+
+button_area.addEventListener('click', evt => {
+    
+    const evt_target = evt.target;
+    let flag = false;
+    
+    if (evt_target.classList.contains('button--left')) {
+        if (column > 0) {
+            column -= 1;
+            flag = true;
+        }
+    }
+    if (evt_target.classList.contains('button--right')) {
+        if (column < 6) {
+            column += 1;
+            flag = true;
+        }
+    }
+    if (evt_target.classList.contains('button--down')) {
+        seta.classList.toggle('fa-chevron-down-color2');
+    }
+    if (flag === true) {
+        render();
+    }
+});
+
+
+//Mensagem de vitória:
+const winner = (player, classList) => {
+    const victory = document.querySelector('body');
+    const conquer = document.createElement('div');
+    conquer.classList = 'invictus';
+    conquer.classList.add(classList);
+    conquer.innerHTML = `${player} venceu!`;
+    victory.appendChild(conquer);
+};
+
+if ('lorem ipsum dolor') {
+    setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
+}
+
+setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
+
+
+lig_4.start()
 
 //Gabriel
 
