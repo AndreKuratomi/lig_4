@@ -272,7 +272,7 @@ input: {
         if (!won) {
             const cols = [...document.querySelectorAll('div.game__col')].map(col => col.children).filter(col => col.length !== 7)
 
-            if (cols.length) {
+            if (!cols.length) {
                 console.log('Tie')
             }
         }
