@@ -121,6 +121,17 @@ input: {
                 })
             }
         },
+        disk: {
+            animate(disk, final_position) {
+                setTimeout( _ => {
+                    disk.style.top = `${47 * final_position + 40}px`
+                })
+                setTimeout( _ => {
+                    disk.classList.remove('player__disk--animating')
+                    disk.style.top = `${0}px`
+                }, 500)
+            }
+        },
         start() {
             this.buttons.start()
         }
@@ -149,7 +160,7 @@ input: {
         new_disk() {
             const col = document.querySelector(`div#col_${lig_4.column}`)
             const seta = document.querySelector('i.fa-chevron-down')
-            let x_axis = 0
+            let y_axis = 0
 
             if (col.children.length < 6 + 1) {
                 const disk = document.createElement('div')
@@ -160,14 +171,15 @@ input: {
                     disk.classList.add('player__disk--two')
                     cur_player = '2'
                 }
+                disk.classList.add('player__disk--animating')
                 col.appendChild(disk)
                 
-                while (x_axis < 6) {
-                    if (lig_4.matrix.path[x_axis][lig_4.column] !== ' ') break
-                    x_axis++
+                while (y_axis < 6) {
+                    if (lig_4.matrix.path[y_axis][lig_4.column] !== ' ') break
+                    y_axis++
                 }
-                lig_4.matrix.path[--x_axis][lig_4.column] = cur_player
-                console.table(lig_4.matrix.path)
+                lig_4.matrix.path[--y_axis][lig_4.column] = cur_player
+                lig_4.animations.disk.animate(disk, y_axis)
 
                 return true
             }
