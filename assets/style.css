@@ -33,6 +33,11 @@ header {
     margin-top: 25px;
     font-size: 0.8rem;
 }
+
+header h1 {
+    margin-bottom: 0.5rem;
+}
+
 #inputNames {
     display: flex;
     flex-direction: column;
@@ -78,7 +83,7 @@ div.container {
     position: relative;
 }
 
-form#inputNames.hidden, div.container.hidden, button.reset__button{
+form#inputNames.hidden, div.container.hidden, button.reset__button.hidden{
     display: none;
 }
 
@@ -146,7 +151,7 @@ div.button_area {
     display: grid;
     width: 130px;
     margin: 0 auto;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     grid-template: auto / 50% 50%;
     grid-template-areas: 'left right'
                          'down down';
@@ -323,6 +328,14 @@ div.player__disk {
     z-index: 50;
     position: relative;
     /* animation: insert 1s; */
+}
+
+div.player__disk--animating {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.5s ease;
 }
 
 
