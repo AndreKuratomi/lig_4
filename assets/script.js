@@ -41,9 +41,10 @@ const lig_4 = {
                     if (lig_4.disks.new_disk()) {
                         seta.classList.toggle('fa-chevron-down-color2');
                     }
+                    lig_4.verify()
                 }
                 if (flag) {
-                    this.render(seta);
+                    this.render(seta)
                 }
             })
         },
@@ -155,6 +156,31 @@ const lig_4 = {
 
             return false
         }
+    },
+    verify() {    
+        let array = lig_4.matrix.path
+
+        // Horizontal
+        for (let i = 0; i < array.length; i++) {
+            for (let j = 0; j < array[i].length - 3; j++) {
+                if (array[i][j] !== " "
+                    &&
+                    array[i][j] === array[i][j+1]
+                    &&
+                    array[i][j] === array[i][j+2]
+                    &&
+                    array[i][j] === array[i][j+3]){
+                    if(array[i][j] === '1') {
+                        // setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
+                        console.log('Jogador 1')
+                    }
+                    else {
+                        // setTimeout(() => { winner(jogadorDois, 'invictu2'); }, 5000);
+                        console.log('Jogador 2')
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -178,7 +204,6 @@ const lig_4 = {
 // }
 
 // setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
-
 
 lig_4.start()
 
