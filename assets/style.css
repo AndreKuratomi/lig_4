@@ -369,6 +369,7 @@ div.game_container::after {
     display: none;
 }
 
+
 div.invictus {
     border-radius: 15%;
     color: #000;
@@ -390,6 +391,9 @@ div.invictus {
 }
 .invictu2 {
     background-color: var(--green);
+}
+.noWay {
+    background-color: #F00;
 }
 
 
