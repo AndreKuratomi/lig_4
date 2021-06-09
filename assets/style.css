@@ -14,7 +14,7 @@
     margin: 0;
     border: none;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -28,43 +28,49 @@ body, html {
 
 
 /* Gabriel */
-header{
+header {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
+    font-size: 0.8rem;
 }
-#inputNames{
+#inputNames {
     display: flex;
     flex-direction: column;
     align-items: center;  
-    margin-top: 100px;
+    margin: 100px auto 0;
+    max-width: 300px;
+    padding: 3rem 1rem;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+    border-radius: 1rem;
+    background-color: white;
 }
 
-#inputUm{
-    font-size: 20px;
-    border: 1px solid var(--dark_green);
-    width: 200px;
-    background-color: var(--light_green);
-    margin: 10px;
-    color: var(--dark_green);
+p.player__versus {
+    font-weight: 600;
 }
 
-#inputDois{
-    font-size: 20px;
-    border: 1px solid var(--dark_green);
+#submit {
     width: 200px;
-    background-color: var(--light_green);
-    margin: 10px;
-    color: var(--dark_green);
-}
-
-#submit{
-    height: 20px;
-    width: 200px;
+    margin-top: 1.25rem;
     background-color: var(--dark_green);
-    color: var(--light_green);
-    margin: 10px;
+    color: white;
+    font-weight: 300;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
 }
 
+input.player__input {
+    padding: 0.5rem 1rem;
+    outline: none;
+    width: 200px;
+    font-size: 1rem;
+    margin: 0.5rem;
+    border-radius: 1rem;
+    background-color: rgb(226, 226, 226);
+}
+
+/* Lucas */
 
 div.container {
     width: calc(7 * var(--col_width));
@@ -72,7 +78,7 @@ div.container {
     position: relative;
 }
 
-form#inputNames.hidden, div.container.hidden{
+form#inputNames.hidden, div.container.hidden, button.reset__button{
     display: none;
 }
 
@@ -319,6 +325,7 @@ div.player__disk {
     /* animation: insert 1s; */
 }
 
+
 /* @keyframes insert {
     0% {
         position: absolute;
@@ -335,6 +342,17 @@ div.player__disk {
         top: calc(37px * 7 + 16px)
     }
 } */
+
+p.input__error_msg {
+    color: red;
+    margin: 1rem 0;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+p.input__error_msg-hidden {
+    opacity: 0;
+}
 
 div.player__disk--two {
     background-color: var(--green);

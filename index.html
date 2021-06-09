@@ -6,52 +6,53 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Lig-4</title>
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="./assets/style.css">
         <script src="https://kit.fontawesome.com/da9408ba8b.js" crossorigin="anonymous" defer></script>
     </head>
     <body>
-        <!-- Header -->
-        <header>
-            <h1>CONNECT-FOUR</h1>
-            <form id="inputNames" action="#">
-                <p>Insira o nome dos jogadores</p>
-                <input type="text" size="20px" maxlength="15" id="inputUm" placeholder="Jogador 1">
-                <p>X</p>
-                <input type="text" size="20px" maxlength="15" id="inputDois" placeholder="Jogador 2">
-                <button id="submit" type="button">Submit</button>
-            </form>
-        </header>
-        <!-- Main -->
-        <main>
-            <div class="container hidden">
-                <i class="fas fa-chevron-down"></i>
-                <div class="game_container">
-                    <div class="game__col" id="col_0"></div>
-                    <div class="game__col" id="col_1"></div>
-                    <div class="game__col" id="col_2"></div>
-                    <div class="game__col" id="col_3"></div>
-                    <div class="game__col" id="col_4"></div>
-                    <div class="game__col" id="col_5"></div>
-                    <div class="game__col" id="col_6"></div>
-                </div>
+        <div class="full_container">
+            <!-- Header -->
+            <header>
+                <h1>CONNECT-FOUR</h1>
+                <form id="inputNames" action="#">
+                    <p>Insira o nome dos jogadores</p>
+                    <input class="player__input" type="text" size="20px" maxlength="15" id="inputUm" placeholder="Jogador 1">
+                    <p class="player__versus">X</p>
+                    <input class="player__input" type="text" size="20px" maxlength="15" id="inputDois" placeholder="Jogador 2">
+                    <button id="submit" type="button">submit</button>
+                    <p class="input__error_msg input__error_msg-hidden">Nome de jogador inválido</p>
+                </form>
+            </header>
+            <!-- Main -->
+            <main>
+                <div class="container hidden">
+                    <i class="fas fa-chevron-down"></i>
+                    <div class="game_container">
+                        <div class="game__col" id="col_0"></div>
+                        <div class="game__col" id="col_1"></div>
+                        <div class="game__col" id="col_2"></div>
+                        <div class="game__col" id="col_3"></div>
+                        <div class="game__col" id="col_4"></div>
+                        <div class="game__col" id="col_5"></div>
+                        <div class="game__col" id="col_6"></div>
+                    </div>
 
-                <div class="player">
-                    <div class="player__name player__name--one">Jogador 1</div>
-                    <div class="player__name player__name--two">Jogador 2</div>
-                </div>
+                    <div class="player">
+                        <div class="player__name player__name--one">Jogador 1</div>
+                        <div class="player__name player__name--two">Jogador 2</div>
+                    </div>
 
-                <div class="button_area">
-                    <div class="button button--left"></div>
-                    <div class="button button--right"></div>
-                    <div class="button button--down"></div>
+                    <div class="button_area">
+                        <div class="button button--left"></div>
+                        <div class="button button--right"></div>
+                        <div class="button button--down"></div>
+                    </div>
                 </div>
-            </div>
-        </main>
+            </main> 
 
-        <!-- Footer -->
-        <button class="reset__button">restart</button>
-        
+            <button class="reset__button hidden">restart</button>
+        </div>      
         <script src="./assets/script.js"></script>
     </body>
 </html>
