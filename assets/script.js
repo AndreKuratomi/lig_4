@@ -181,6 +181,71 @@ const lig_4 = {
                 }
             }
         }
+        // Vertical
+        for (let i = 0; i < array.length - 2; i++) {            
+            for (let j = 0; j < array[i].length; j++) {
+                if (array[i][j] !== " "
+                    &&
+                    array[i][j] === array[i+1][j]
+                    &&
+                    array[i][j] === array[i+2][j]
+                    &&
+                    array[i][j] === array[i+3][j]){
+                    if(array[i][j] === '1') {
+                        // setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
+                        console.log('Jogador 1')
+                    }
+                    else {
+                        // setTimeout(() => { winner(jogadorDois, 'invictu2'); }, 5000);
+                        console.log('Jogador 2')
+                    }
+                }
+            }    
+        }
+        //Diagonal p/ baixo
+        for (let i = 0; i < array.length - 3; i++) {            
+            for (let j = 0; j < array[i].length - 2; j++) {
+
+                if (array[i][j] !== " "
+                    &&
+                    array[i][j] === array[i+1][j+1]
+                    &&
+                    array[i][j] === array[i+2][j+2]
+                    &&
+                    array[i][j] === array[i+3][j+3]){      
+                    if(array[i][j] === '1') {
+                        // setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
+                        console.log('Jogador 1')
+                    }
+                    else {
+                        // setTimeout(() => { winner(jogadorDois, 'invictu2'); }, 5000);
+                        console.log('Jogador 2')
+                    }
+                } 
+            }
+        }
+        //Diagonal p/ cima
+        for (let i = array.length - 2; i < array.length; i++) {            
+            for (let j = 0; j < array[i].length - 3; j++) {
+
+                if (array[i][j] !== " "
+                    &&
+                    array[i][j] === array[i-1][j+1]
+                    &&
+                    array[i][j] === array[i-2][j+2]
+                    &&
+                    array[i][j] === array[i-3][j+3]){ 
+                    if(array[i][j] === '1') {
+                        // setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
+                        console.log('Jogador 1')
+                    }
+                    else {
+                        // setTimeout(() => { winner(jogadorDois, 'invictu2'); }, 5000);
+                        console.log('Jogador 2')
+                    }
+                }
+            }
+        }
     }
 }
 
