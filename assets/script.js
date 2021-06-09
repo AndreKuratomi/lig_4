@@ -53,46 +53,28 @@ const lig_4 = {
         }
     },
 // Gabriel,
-input: {
-    error_id: null,
-    get_names() {
-        const inputNames = document.getElementById('inputNames');
-        const submit = document.getElementById('submit');
+    input: {
+        get_names() {
+            const inputNames = document.getElementById('inputNames');
+            const submit = document.getElementById('submit');
 
-        submit.addEventListener('click', function(){
-            const jogadorUm = document.getElementById('inputUm').value;
-            const jogadorDois = document.getElementById('inputDois').value;
-
-            if (
-                jogadorUm.trim() !== '' 
-                && 
-                jogadorDois.trim() !== ''
-                &&
-                jogadorUm.trim() !== jogadorDois.trim()) {    
+            submit.addEventListener('click', function(){
+                const jogadorUm = document.getElementById('inputUm').value;
+                const jogadorDois = document.getElementById('inputDois').value;
                 const playernameOne = document.querySelector('div.player__name--one');
                 const playernameTwo = document.querySelector('div.player__name--two');
                 const container = document.querySelector("div.container");
-                const reset_button = document.querySelector('button.reset__button')
 
                 playernameOne.innerText = jogadorUm;
                 playernameTwo.innerText = jogadorDois;
                 inputNames.classList.add('hidden');
                 container.classList.remove('hidden');
-                reset_button.classList.remove('hidden')
-
-            } else {
-                const error = document.querySelector('p.input__error_msg')
-
-                error.classList.remove('input__error_msg-hidden')
-                clearTimeout(this.error_id)
-                this.error_id = setTimeout( _ => error.classList.add('input__error_msg-hidden'), 2500)
-            }
-        })
+            })
+        },
+        start() {
+            this.get_names()
+        }
     },
-    start() {
-        this.get_names()
-    }
-},
     animations: {
         buttons: {
             start() {
@@ -272,7 +254,7 @@ input: {
         if (!won) {
             const cols = [...document.querySelectorAll('div.game__col')].map(col => col.children).filter(col => col.length !== 7)
 
-            if (cols.length) {
+            if (!cols.length) {
                 result2('noWay');
             }
         }
@@ -325,6 +307,5 @@ lig_4.start()
 //Gabriel
 
 
+
 //Lucas
-
-
