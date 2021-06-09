@@ -159,7 +159,7 @@ const lig_4 = {
     },
     verify() {    
         let array = lig_4.matrix.path
-
+        let winFlag = false;
         // Horizontal
         for (let i = 0; i < array.length; i++) {
             for (let j = 0; j < array[i].length - 3; j++) {
@@ -246,6 +246,16 @@ const lig_4 = {
                 }
             }
         }
+
+        if (!won) {
+            const cols = [...document.querySelectorAll('div.game__col')].map(col => col.children).filter(col => col.length !== 7)
+
+            if (cols.length) {
+                console.log('Tie')
+            }
+        }
+
+
     }
 }
 
