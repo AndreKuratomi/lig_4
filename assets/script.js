@@ -190,12 +190,12 @@ input: {
                     array[i][j] === array[i][j+3]){
                     won = true;
                     if(array[i][j] === '1') {
-                        // setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
-                        console.log('Jogador 1')
+                        const player1 = document.getElementById('inputUm').value;
+                        result(player1, 'invictu1');
                     }
                     else {
-                        // setTimeout(() => { winner(jogadorDois, 'invictu2'); }, 5000);
-                        console.log('Jogador 2')
+                        const player2 = document.getElementById('inputDois').value;
+                        result(player2, 'invictu2');
                     }
                 }
             }
@@ -212,12 +212,12 @@ input: {
                     array[i][j] === array[i+3][j]){
                     won = true;
                     if(array[i][j] === '1') {
-                        // setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
-                        console.log('Jogador 1')
+                        const player1 = document.getElementById('inputUm').value;
+                        result(player1, 'invictu1');
                     }
                     else {
-                        // setTimeout(() => { winner(jogadorDois, 'invictu2'); }, 5000);
-                        console.log('Jogador 2')
+                        const player2 = document.getElementById('inputDois').value;
+                        result(player2, 'invictu2');
                     }
                 }
             }    
@@ -235,14 +235,14 @@ input: {
                     array[i][j] === array[i+3][j+3]){  
                     won = true;    
                     if(array[i][j] === '1') {
-                        // setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
-                        console.log('Jogador 1')
+                        const player1 = document.getElementById('inputUm').value;
+                        result(player1, 'invictu1');
                     }
                     else {
-                        // setTimeout(() => { winner(jogadorDois, 'invictu2'); }, 5000);
-                        console.log('Jogador 2')
+                        const player2 = document.getElementById('inputDois').value;
+                        result(player2, 'invictu2');
                     }
-                } 
+                }
             }
         }
         //Diagonal p/ cima
@@ -258,12 +258,12 @@ input: {
                     array[i][j] === array[i-3][j+3]){
                     won = true; 
                     if(array[i][j] === '1') {
-                        // setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
-                        console.log('Jogador 1')
+                        const player1 = document.getElementById('inputUm').value;
+                        result(player1, 'invictu1');
                     }
                     else {
-                        // setTimeout(() => { winner(jogadorDois, 'invictu2'); }, 5000);
-                        console.log('Jogador 2')
+                        const player2 = document.getElementById('inputDois').value;
+                        result(player2, 'invictu2');
                     }
                 }
             }
@@ -282,25 +282,29 @@ input: {
 }
 
 
-
 //André
 
 //Mensagem de vitória:
 
-// const winner = (player, classList) => {
-//     const victory = document.querySelector('body');
-//     const conquer = document.createElement('div');
-//     conquer.classList = 'invictus';
-//     conquer.classList.add(classList);
-//     conquer.innerHTML = `${player} venceu!`;
-//     victory.appendChild(conquer);
-// };
+const winner = (player, classList) => {
+    const victory = document.querySelector('div.container');
+    const conquer = document.createElement('div');
+    conquer.classList = 'invictus';
+    conquer.id = 'hideMeOnTime';
+    conquer.classList.add(classList);
+    conquer.innerHTML = `${player} venceu!`;
+    victory.appendChild(conquer);
+};
 
-// if ('lorem ipsum dolor') {
-//     setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
-// }
+const result = (player, classList) => {
+    setTimeout(() => { 
+    winner(player, classList); 
+    }, 1000);
+    setTimeout (() => {
+    document.getElementById('hideMeOnTime').style.display = 'none';
+    }, 10000);
+}
 
-// setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
 
 lig_4.start()
 

@@ -369,31 +369,29 @@ div.game_container::after {
     display: none;
 }
 
-div.invictu {
-    background-color: var(--yellow);
+div.invictus {
     border-radius: 15%;
     color: #000;
+    font-size: x-large;
     font-weight: bold;
     text-transform: uppercase;
     position: absolute;
-    top: 20rem;
-    left: 5rem;
+    top: 15rem;
+    left: 1.5rem;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 60vw;
+    width: 80vw;
     height: 10vh;
+    z-index: 200;
 }
 .invictu1 {
-    background-color: var(--dark-green);
+    background-color: var(--dark_green);
 }
 .invictu2 {
     background-color: var(--green);
 }
-span#majestic {
-    background-color: #F00;
-    text-decoration: underline;
-}
+
 
 @media (min-width: 768px) {
     div.game_container {
