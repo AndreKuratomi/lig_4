@@ -9,11 +9,26 @@ const lig_4 = {
         }
     },
     start() {
+        const reset = document.querySelector('button.reset__button')
+
         this.matrix.start()
         this.animations.start()
         this.disks.start()
         this.input.start()
         this.controller.start()
+        reset.addEventListener('click', this.reset.bind(this))
+    },
+    reset() {
+        const cols = [...document.querySelectorAll('div.game__col')]
+        const arrow = document.querySelector('i.fa-chevron-down')
+
+        this.input.error_id = null
+        this.column = 3
+        cols.forEach(col => col.innerHTML = '')
+        arrow.classList.remove('fa-chevron-down-color2')
+        this.controller.render(arrow)
+        this.disks.start()
+        this.matrix.start()
     },
 // André,
     controller: {
@@ -53,46 +68,46 @@ const lig_4 = {
         }
     },
 // Gabriel,
-input: {
-    error_id: null,
-    get_names() {
-        const inputNames = document.getElementById('inputNames');
-        const submit = document.getElementById('submit');
+    input: {
+        error_id: null,
+        get_names() {
+            const inputNames = document.getElementById('inputNames');
+            const submit = document.getElementById('submit');
 
-        submit.addEventListener('click', function(){
-            const jogadorUm = document.getElementById('inputUm').value;
-            const jogadorDois = document.getElementById('inputDois').value;
+            submit.addEventListener('click', function(){
+                const jogadorUm = document.getElementById('inputUm').value;
+                const jogadorDois = document.getElementById('inputDois').value;
 
-            if (
-                jogadorUm.trim() !== '' 
-                && 
-                jogadorDois.trim() !== ''
-                &&
-                jogadorUm.trim() !== jogadorDois.trim()) {    
-                const playernameOne = document.querySelector('div.player__name--one');
-                const playernameTwo = document.querySelector('div.player__name--two');
-                const container = document.querySelector("div.container");
-                const reset_button = document.querySelector('button.reset__button')
+                if (
+                    jogadorUm.trim() !== '' 
+                    && 
+                    jogadorDois.trim() !== ''
+                    &&
+                    jogadorUm.trim() !== jogadorDois.trim()) {    
+                    const playernameOne = document.querySelector('div.player__name--one');
+                    const playernameTwo = document.querySelector('div.player__name--two');
+                    const container = document.querySelector("div.container");
+                    const reset_button = document.querySelector('button.reset__button')
 
-                playernameOne.innerText = jogadorUm;
-                playernameTwo.innerText = jogadorDois;
-                inputNames.classList.add('hidden');
-                container.classList.remove('hidden');
-                reset_button.classList.remove('hidden')
+                    playernameOne.innerText = jogadorUm;
+                    playernameTwo.innerText = jogadorDois;
+                    inputNames.classList.add('hidden');
+                    container.classList.remove('hidden');
+                    reset_button.classList.remove('hidden')
 
-            } else {
-                const error = document.querySelector('p.input__error_msg')
+                } else {
+                    const error = document.querySelector('p.input__error_msg')
 
-                error.classList.remove('input__error_msg-hidden')
-                clearTimeout(this.error_id)
-                this.error_id = setTimeout( _ => error.classList.add('input__error_msg-hidden'), 2500)
-            }
-        })
+                    error.classList.remove('input__error_msg-hidden')
+                    clearTimeout(this.error_id)
+                    this.error_id = setTimeout( _ => error.classList.add('input__error_msg-hidden'), 2500)
+                }
+            })
+        },
+        start() {
+            this.get_names()
+        }
     },
-    start() {
-        this.get_names()
-    }
-},
     animations: {
         buttons: {
             start() {
