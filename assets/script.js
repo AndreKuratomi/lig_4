@@ -38,7 +38,9 @@ const lig_4 = {
                     }
                 }
                 if (evt_target.classList.contains('button--down')) {
-                    seta.classList.toggle('fa-chevron-down-color2');
+                    if (lig_4.disks.new_disk()) {
+                        seta.classList.toggle('fa-chevron-down-color2');
+                    }
                 }
                 if (flag) {
                     this.render(seta);
@@ -73,7 +75,7 @@ const lig_4 = {
         }
     },
     animations: {
-    buttons: {
+        buttons: {
             start() {
                 const buton_area = document.querySelector('div.button_area')
                 
@@ -121,8 +123,37 @@ const lig_4 = {
                     el.classList.add('disk--blank')
                     container.appendChild(el)
                 }
+                col.innerHTML = ''
                 col.appendChild(container)
             })
+        },
+        new_disk() {
+            const col = document.querySelector(`div#col_${lig_4.column}`)
+            const seta = document.querySelector('i.fa-chevron-down')
+            let x_axis = 0
+
+            if (col.children.length < 6 + 1) {
+                const disk = document.createElement('div')
+                let cur_player = '1'
+
+                disk.classList.add('player__disk')
+                if (seta.classList.contains('fa-chevron-down-color2')) {
+                    disk.classList.add('player__disk--two')
+                    cur_player = '2'
+                }
+                col.appendChild(disk)
+                
+                while (x_axis < 6) {
+                    if (lig_4.matrix.path[x_axis][lig_4.column] !== ' ') break
+                    x_axis++
+                }
+                lig_4.matrix.path[--x_axis][lig_4.column] = cur_player
+                console.table(lig_4.matrix.path)
+
+                return true
+            }
+
+            return false
         }
     }
 }
