@@ -53,28 +53,46 @@ const lig_4 = {
         }
     },
 // Gabriel,
-    input: {
-        get_names() {
-            const inputNames = document.getElementById('inputNames');
-            const submit = document.getElementById('submit');
+input: {
+    error_id: null,
+    get_names() {
+        const inputNames = document.getElementById('inputNames');
+        const submit = document.getElementById('submit');
 
-            submit.addEventListener('click', function(){
-                const jogadorUm = document.getElementById('inputUm').value;
-                const jogadorDois = document.getElementById('inputDois').value;
+        submit.addEventListener('click', function(){
+            const jogadorUm = document.getElementById('inputUm').value;
+            const jogadorDois = document.getElementById('inputDois').value;
+
+            if (
+                jogadorUm.trim() !== '' 
+                && 
+                jogadorDois.trim() !== ''
+                &&
+                jogadorUm.trim() !== jogadorDois.trim()) {    
                 const playernameOne = document.querySelector('div.player__name--one');
                 const playernameTwo = document.querySelector('div.player__name--two');
                 const container = document.querySelector("div.container");
+                const reset_button = document.querySelector('button.reset__button')
 
                 playernameOne.innerText = jogadorUm;
                 playernameTwo.innerText = jogadorDois;
                 inputNames.classList.add('hidden');
                 container.classList.remove('hidden');
-            })
-        },
-        start() {
-            this.get_names()
-        }
+                reset_button.classList.remove('hidden')
+
+            } else {
+                const error = document.querySelector('p.input__error_msg')
+
+                error.classList.remove('input__error_msg-hidden')
+                clearTimeout(this.error_id)
+                this.error_id = setTimeout( _ => error.classList.add('input__error_msg-hidden'), 2500)
+            }
+        })
     },
+    start() {
+        this.get_names()
+    }
+},
     animations: {
         buttons: {
             start() {
@@ -159,7 +177,7 @@ const lig_4 = {
     },
     verify() {    
         let array = lig_4.matrix.path
-        let winFlag = false;
+        let won = false;
         // Horizontal
         for (let i = 0; i < array.length; i++) {
             for (let j = 0; j < array[i].length - 3; j++) {
@@ -170,6 +188,7 @@ const lig_4 = {
                     array[i][j] === array[i][j+2]
                     &&
                     array[i][j] === array[i][j+3]){
+                    won = true;
                     if(array[i][j] === '1') {
                         // setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
                         console.log('Jogador 1')
@@ -191,6 +210,7 @@ const lig_4 = {
                     array[i][j] === array[i+2][j]
                     &&
                     array[i][j] === array[i+3][j]){
+                    won = true;
                     if(array[i][j] === '1') {
                         // setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
                         console.log('Jogador 1')
@@ -212,7 +232,8 @@ const lig_4 = {
                     &&
                     array[i][j] === array[i+2][j+2]
                     &&
-                    array[i][j] === array[i+3][j+3]){      
+                    array[i][j] === array[i+3][j+3]){  
+                    won = true;    
                     if(array[i][j] === '1') {
                         // setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
                         console.log('Jogador 1')
@@ -234,7 +255,8 @@ const lig_4 = {
                     &&
                     array[i][j] === array[i-2][j+2]
                     &&
-                    array[i][j] === array[i-3][j+3]){ 
+                    array[i][j] === array[i-3][j+3]){
+                    won = true; 
                     if(array[i][j] === '1') {
                         // setTimeout(() => { winner(jogadorUm, 'invictu1'); }, 5000);
                         console.log('Jogador 1')
