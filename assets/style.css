@@ -278,7 +278,7 @@ div.blank_container {
     color: var(--light_green);
     position: absolute;
     bottom: 0;
-    left: 5px;
+    left: 6px;
 }
 
 div.blank_container p {
@@ -306,6 +306,38 @@ div.disk--blank::after {
     left: -4px;
     top: -10px;
     z-index: 100;
+}
+
+div.player__disk {
+    width: 37px;
+    height: 37px;
+    margin: -6px auto 16px;
+    background-color: var(--dark_green);
+    border-radius: 50%;
+    z-index: 50;
+    position: relative;
+    /* animation: insert 1s; */
+}
+
+/* @keyframes insert {
+    0% {
+        position: absolute;
+        left: 50%;
+        top: -10px;
+        transform: translateX(-50%);
+        z-index: 40;
+    }
+    80%, 100% {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 40;
+        top: calc(37px * 7 + 16px)
+    }
+} */
+
+div.player__disk--two {
+    background-color: var(--green);
 }
 
 
