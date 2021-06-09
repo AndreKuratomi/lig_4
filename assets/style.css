@@ -334,6 +334,12 @@ div.invictu {
     width: 60vw;
     height: 10vh;
 }
+.invictu1 {
+    background-color: var(--dark-green);
+}
+.invictu2 {
+    background-color: var(--green);
+}
 span#majestic {
     background-color: #F00;
     text-decoration: underline;
