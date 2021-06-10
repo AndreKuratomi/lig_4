@@ -42,6 +42,7 @@ const lig_4 = {
         this.controller.render(arrow)
         this.disks.start()
         this.matrix.start()
+        this.win.reset()
         this.reseting = false
     },
 // André,
@@ -213,7 +214,7 @@ const lig_4 = {
                 const len = cols.length
 
                 lig_4.reseting = true
-                // await new Promise(r => setTimeout(r, 100))
+                lig_4.win.has_winner = false
                 for (let i = 0; i < len; i++) {
                     const col = cols[i]
 
@@ -276,7 +277,7 @@ const lig_4 = {
             const seta = document.querySelector('i.fa-chevron-down')
             let y_axis = 0
 
-            if (col.children.length < 6 + 1 && !lig_4.reseting) {
+            if (col.children.length < 6 + 1 && !lig_4.reseting && !lig_4.win.has_winner) {
                 const disk = document.createElement('div')
                 let cur_player = '1'
 
@@ -309,88 +310,91 @@ const lig_4 = {
             two: false
         }
 
-        // Horizontal
-        for (let i = 0; i < array.length; i++) {
-            for (let j = 0; j < array[i].length - 3; j++) {
-                if (array[i][j] !== " "
-                    &&
-                    array[i][j] === array[i][j+1]
-                    &&
-                    array[i][j] === array[i][j+2]
-                    &&
-                    array[i][j] === array[i][j+3]){
-                    won = true;
-                    if(array[i][j] === '1') {
-                        player.name = document.getElementById('inputUm').value;
-                    }
-                    else {
-                        player.name = document.getElementById('inputDois').value;
-                        player.two = true
-                    }
-                }
-            }
-        }
-        // Vertical
-        for (let i = 0; i < array.length - 3; i++) { 
-            for (let j = 0; j < array[i].length; j++) {
-                if (array[i][j] !== " "
-                    &&
-                    array[i][j] === array[i+1][j]
-                    &&
-                    array[i][j] === array[i+2][j]
-                    &&
-                    array[i][j] === array[i+3][j]){
-                    won = true;
-                    if(array[i][j] === '1') {
-                        player.name = document.getElementById('inputUm').value;
-                    }
-                    else {
-                        player.name = document.getElementById('inputDois').value;
-                        player.two = true
-                    }
-                }
-            } 
-        }
-        //Diagonal p/ baixo
-        for (let i = 0; i < array.length - 3; i++) { 
-            for (let j = 0; j < array[i].length - 2; j++) {
-
-                if (array[i][j] !== " "
-                    &&
-                    array[i][j] === array[i+1][j+1]
-                    &&
-                    array[i][j] === array[i+2][j+2]
-                    &&
-                    array[i][j] === array[i+3][j+3]){ 
-                    won = true; 
-                    if(array[i][j] === '1') {
-                        player.name = document.getElementById('inputUm').value;
-                    }
-                    else {
-                        player.name = document.getElementById('inputDois').value;
-                        player.two = true
+        if (!this.reseting)
+        {    
+            // Horizontal
+            for (let i = 0; i < array.length; i++) {
+                for (let j = 0; j < array[i].length - 3; j++) {
+                    if (array[i][j] !== " "
+                        &&
+                        array[i][j] === array[i][j+1]
+                        &&
+                        array[i][j] === array[i][j+2]
+                        &&
+                        array[i][j] === array[i][j+3]){
+                        won = true;
+                        if(array[i][j] === '1') {
+                            player.name = document.getElementById('inputUm').value;
+                        }
+                        else {
+                            player.name = document.getElementById('inputDois').value;
+                            player.two = true
+                        }
                     }
                 }
             }
-        }
-        //Diagonal p/ cima
-        for (let i = array.length - 2; i < array.length; i++) { 
-            for (let j = 0; j < array[i].length - 3; j++) {
-
-                if (array[i][j] !== " "
-                    &&
-                    array[i][j] === array[i-1][j+1]
-                    &&
-                    array[i][j] === array[i-2][j+2]
-                    &&
-                    array[i][j] === array[i-3][j+3]){
-                    won = true; 
-                    if(array[i][j] === '1') {
-                        player.name = document.getElementById('inputUm').value;
+            // Vertical
+            for (let i = 0; i < array.length - 3; i++) { 
+                for (let j = 0; j < array[i].length; j++) {
+                    if (array[i][j] !== " "
+                        &&
+                        array[i][j] === array[i+1][j]
+                        &&
+                        array[i][j] === array[i+2][j]
+                        &&
+                        array[i][j] === array[i+3][j]){
+                        won = true;
+                        if(array[i][j] === '1') {
+                            player.name = document.getElementById('inputUm').value;
+                        }
+                        else {
+                            player.name = document.getElementById('inputDois').value;
+                            player.two = true
+                        }
                     }
-                    else {
-                        player.name = document.getElementById('inputDois').value;
-                        player.two = true
+                } 
+            }
+            //Diagonal p/ baixo
+            for (let i = 0; i < array.length - 3; i++) { 
+                for (let j = 0; j < array[i].length - 2; j++) {
+
+                    if (array[i][j] !== " "
+                        &&
+                        array[i][j] === array[i+1][j+1]
+                        &&
+                        array[i][j] === array[i+2][j+2]
+                        &&
+                        array[i][j] === array[i+3][j+3]){ 
+                        won = true; 
+                        if(array[i][j] === '1') {
+                            player.name = document.getElementById('inputUm').value;
+                        }
+                        else {
+                            player.name = document.getElementById('inputDois').value;
+                            player.two = true
+                        }
+                    }
+                }
+            }
+            //Diagonal p/ cima
+            for (let i = array.length - 2; i < array.length; i++) { 
+                for (let j = 0; j < array[i].length - 3; j++) {
+
+                    if (array[i][j] !== " "
+                        &&
+                        array[i][j] === array[i-1][j+1]
+                        &&
+                        array[i][j] === array[i-2][j+2]
+                        &&
+                        array[i][j] === array[i-3][j+3]){
+                        won = true; 
+                        if(array[i][j] === '1') {
+                            player.name = document.getElementById('inputUm').value;
+                        }
+                        else {
+                            player.name = document.getElementById('inputDois').value;
+                            player.two = true
+                        }
                     }
                 }
             }
@@ -405,10 +409,11 @@ const lig_4 = {
         } else this.win.set_winner(player.name, player.two)
     },
     win: {
+        has_winner: false,
         set_winner(player_name, player_two=false, tie=false) {
             const victory = document.querySelector('div.message_area');
             const conquer = document.createElement('div');
-
+   
             conquer.classList.add('invictus');
             if (player_name) conquer.innerText = `${player_name} venceu!`;
             if (player_two) conquer.classList.add('invictus2')
@@ -416,10 +421,19 @@ const lig_4 = {
             victory.innerHTML = ''
             victory.appendChild(conquer);
             victory.classList.remove('hidden')
-            setTimeout( _ => {
-                victory.classList.add('hidden')
-                lig_4.reset()
-            }, 4000)
+            if (!this.has_winner)
+                setTimeout( _ => {
+                    victory.classList.add('hidden')
+                }, 4000)
+            else
+                setTimeout( _ => {
+                    victory.classList.add('hidden')
+                }, 2000)
+
+            this.has_winner = true
+        },
+        reset() {
+            this.has_winner = false
         }
     }
 }
