@@ -33,10 +33,27 @@ header {
     text-align: center;
     margin-top: 25px;
     font-size: 0.8rem;
+    position: relative;
 }
 
 header h1 {
     margin-bottom: 0.5rem;
+}
+
+button.button--header {
+    padding: 0.25rem 0.35rem;
+    border-radius: 8px;
+}
+
+div#button__area--header {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+}
+
+button#fullscreen {
+    display: none;
 }
 
 #inputNames {
@@ -162,8 +179,7 @@ div.button_area {
     justify-content: space-between;
     display: grid;
     width: 130px;
-    margin: 0 auto;
-    margin: 0.5rem auto;
+    margin: 0 auto 0.5rem;
     grid-template: auto / 50% 50%;
     grid-template-areas: 'left right'
                          'down down';
@@ -429,11 +445,13 @@ div.invictus {
     z-index: 200;
     background-color: var(--dark_green);
     color: white;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
 }
 
 div.invictus2 {
     background-color: var(--green);
     color: black;
+
 }
 
 div.message_area {
@@ -504,7 +522,7 @@ div.message_area {
         background-color: white;
         border-radius: 0 0 5px 5px;
         border: 1px solid var(--light_green);
-        z-index: 500;
+        z-index: 150;
         cursor: pointer;
     }
 
@@ -553,5 +571,13 @@ div.message_area {
 
     button.reset__button {
         display: none;
+    }
+
+    button#fullscreen {
+        display: inline;
+    }
+
+    div#button__area--header {
+        left: 2rem;
     }
 }
