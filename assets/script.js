@@ -47,14 +47,6 @@ const lig_4 = {
     },
 // André,
     soundEffects: {
-        // clickSound() {
-        //     let click = document.createElement("audio");
-        //     if (click.canPlayType("audio/mpeg")) {
-        //         click.setAttribute("src", "./assets/soundEffects/button-click.mp3")
-        //     }
-        
-        //     click.play();
-        // },
         singleFallingChipSound() {
             let chip = document.createElement("audio");
             if (chip.canPlayType("audio/mpeg")) {
@@ -259,42 +251,45 @@ const lig_4 = {
                 let cols = [...document.querySelectorAll('div.game__col')].map(col => [...col.children].filter(el => el.classList.contains('player__disk')))
                 let total_el = 0
                 const len = cols.length
-                let fall = lig_4.soundEffects.fallingChipsSound()
-                let chipsStore = setInterval(() => {
-                    fall = lig_4.soundEffects.fallingChipsSound()
-                }, 1000)
-                lig_4.reseting = true
-                lig_4.win.has_winner = false
-                for (let i = 0; i < len; i++) {
-                    const col = cols[i]
 
-                    for (let j = 0; j < col.length; j++) {
-                        const el = col[j]
-                        total_el++
+                if (!lig_4.reseting) {
+                    let fall = lig_4.soundEffects.fallingChipsSound()
+                    let chipsStore = setInterval(() => {
+                        fall = lig_4.soundEffects.fallingChipsSound()
+                    }, 1000)
+                    lig_4.reseting = true
+                    lig_4.win.has_winner = false
+                    for (let i = 0; i < len; i++) {
+                        const col = cols[i]
 
-                        el.style.top = `${47 * (5 - j) + 40}px`
-                        el.style.left = '50%'
-                        el.style.position = 'absolute'
-                        el.style.transform = 'translate(-50%, 0)'
+                        for (let j = 0; j < col.length; j++) {
+                            const el = col[j]
+                            total_el++
+
+                            el.style.top = `${47 * (5 - j) + 40}px`
+                            el.style.left = '50%'
+                            el.style.position = 'absolute'
+                            el.style.transform = 'translate(-50%, 0)'
+                        }
                     }
-                }
 
-                for (let i = 0; i < len; i++) {
-                    const index = rand_in_range(0, cols.length - 1)
-                    const col = cols[index]
+                    for (let i = 0; i < len; i++) {
+                        const index = rand_in_range(0, cols.length - 1)
+                        const col = cols[index]
 
-                    for (let j = 0; j < col.length; j++) {
-                        const el = col[j]
+                        for (let j = 0; j < col.length; j++) {
+                            const el = col[j]
 
-                        setTimeout( _ => el.classList.add('player__disk--animating--drop'))
-                        await new Promise(r => setTimeout(r, 100))
+                            setTimeout( _ => el.classList.add('player__disk--animating--drop'))
+                            await new Promise(r => setTimeout(r, 100))
+                        }
+                        cols.splice(index, 1)
                     }
-                    cols.splice(index, 1)
+                    await new Promise(r => setTimeout(r, (total_el - 1) / 2 * 3 + 1000 * (total_el >= 1)))
+                    clearInterval(chipsStore)
+                    fall.pause()
+                    lig_4.reset()
                 }
-                await new Promise(r => setTimeout(r, (total_el - 1) / 2 * 3 + 1000 * (total_el >= 1)))
-                clearInterval(chipsStore)
-                fall.pause()
-                lig_4.reset()
             }
         },
         start() {
