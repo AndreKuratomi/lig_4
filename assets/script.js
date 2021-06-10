@@ -1,7 +1,10 @@
+const rand_in_range = (min, max) => Math.floor(Math.random() * (max + 1)) + min
+
 const lig_4 = {
     player_1: '1',
     player_2: '2',
     column: 3,
+    reseting: false,
     matrix: {
         path: null,
         start() {
@@ -10,6 +13,7 @@ const lig_4 = {
     },
     start() {
         const reset = document.querySelector('button.reset__button')
+        const desktop_reset = document.querySelector('div.reset_desktop')
 
         this.matrix.start()
         this.animations.start()
@@ -17,11 +21,19 @@ const lig_4 = {
         this.input.start()
         this.controller.start()
         reset.addEventListener('click', this.reset.bind(this))
+        desktop_reset.addEventListener('click', _ => {
+            const slider = desktop_reset.children[0]
+
+            this.animations.disk.drop_disks()
+            slider.classList.add('reset_desktop_slider--animating')
+            setTimeout( _ => slider.classList.remove('reset_desktop_slider--animating'), 1000)
+        })
     },
     reset() {
         const cols = [...document.querySelectorAll('div.game__col')]
         const arrow = document.querySelector('i.fa-chevron-down')
 
+        this.reseting = true
         this.input.error_id = null
         this.column = 3
         cols.forEach(col => col.innerHTML = '')
@@ -29,12 +41,14 @@ const lig_4 = {
         this.controller.render(arrow)
         this.disks.start()
         this.matrix.start()
+        this.reseting = false
     },
 // André,
     controller: {
         start() {
             const button_area = document.querySelector('div.button_area')
             const seta = document.querySelector('i.fa-chevron-down')
+            const game_area = document.querySelector('div.game_container')
 
             button_area.addEventListener('click', evt => {
                 const evt_target = evt.target;
@@ -60,6 +74,18 @@ const lig_4 = {
                 }
                 if (flag) {
                     this.render(seta)
+                }
+            })
+
+            game_area.addEventListener('click', evt => {
+                const evt_target = evt.target
+                const row = evt_target.closest('div.game__col')
+
+                if (row) {
+                    lig_4.column = Number(row.id.slice(-1))
+                    this.render(seta)
+                    if (lig_4.disks.new_disk()) seta.classList.toggle('fa-chevron-down-color2');
+                    lig_4.verify()
                 }
             })
         },
@@ -145,6 +171,42 @@ const lig_4 = {
                     disk.classList.remove('player__disk--animating')
                     disk.style.top = `${0}px`
                 }, 500)
+            }, 
+            async drop_disks() {
+                let cols = [...document.querySelectorAll('div.game__col')].map(col => [...col.children].filter(el => el.classList.contains('player__disk')))
+                let total_el = 0
+                const len = cols.length
+
+                lig_4.reseting = true
+                // await new Promise(r => setTimeout(r, 100))
+                for (let i = 0; i < len; i++) {
+                    const col = cols[i]
+
+                    for (let j = 0; j < col.length; j++) {
+                        const el = col[j]
+                        total_el++
+
+                        el.style.top = `${47 * (5 - j) + 40}px`
+                        el.style.left = '50%'
+                        el.style.position = 'absolute'
+                        el.style.transform = 'translate(-50%, 0)'
+                    }
+                }
+
+                for (let i = 0; i < len; i++) {
+                    const index = rand_in_range(0, cols.length - 1)
+                    const col = cols[index]
+
+                    for (let j = 0; j < col.length; j++) {
+                        const el = col[j]
+
+                        setTimeout( _ => el.classList.add('player__disk--animating--drop'))
+                        await new Promise(r => setTimeout(r, 100))
+                    }
+                    cols.splice(index, 1)
+                }
+                await new Promise(r => setTimeout(r, (total_el - 1) / 2 * 3 + 1000 * (total_el >= 1)))
+                lig_4.reset()
             }
         },
         start() {
@@ -166,6 +228,8 @@ const lig_4 = {
                     const el = document.createElement('div')
 
                     el.classList.add('disk--blank')
+                    if (container.children.length === 6) 
+                        el.classList.add('disk--blank--first')
                     container.appendChild(el)
                 }
                 col.innerHTML = ''
@@ -177,7 +241,7 @@ const lig_4 = {
             const seta = document.querySelector('i.fa-chevron-down')
             let y_axis = 0
 
-            if (col.children.length < 6 + 1) {
+            if (col.children.length < 6 + 1 && !lig_4.reseting) {
                 const disk = document.createElement('div')
                 let cur_player = '1'
 
