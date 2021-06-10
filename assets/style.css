@@ -550,4 +550,8 @@ div.message_area {
     div.disk--blank--first::before {
         display: block;
     }
+
+    button.reset__button {
+        display: none;
+    }
 }
