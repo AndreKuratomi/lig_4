@@ -37,6 +37,7 @@ const lig_4 = {
         start() {
             const button_area = document.querySelector('div.button_area')
             const seta = document.querySelector('i.fa-chevron-down')
+            const game_area = document.querySelector('div.game_container')
 
             button_area.addEventListener('click', evt => {
                 const evt_target = evt.target;
@@ -62,6 +63,18 @@ const lig_4 = {
                 }
                 if (flag) {
                     this.render(seta)
+                }
+            })
+
+            game_area.addEventListener('click', evt => {
+                const evt_target = evt.target
+                const row = evt_target.closest('div.game__col')
+
+                if (row) {
+                    lig_4.column = Number(row.id.slice(-1))
+                    this.render(seta)
+                    if (lig_4.disks.new_disk()) seta.classList.toggle('fa-chevron-down-color2');
+                    lig_4.verify()
                 }
             })
         },
