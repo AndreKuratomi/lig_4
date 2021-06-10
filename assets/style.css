@@ -4,6 +4,7 @@
     --green: #47C5B4;
     --light_green: #BEDACD94;
     --blue: #136A81;
+    --misc_blue: #1e5382;
     --col_width: 50px;
 }
 
@@ -98,6 +99,11 @@ div.game_container {
     justify-content: center;
     padding-top: 1.75rem;
     position: relative;
+    z-index: 1;
+}
+
+div.reset_desktop {
+    display: none;
 }
 
 div.game__col {
@@ -327,8 +333,11 @@ div.disk--blank::after, div.disk--blank--first::before {
 
 div.disk--blank--first::before {
     top: 100%;
-    height: 16px;
-    border-radius: 5px;
+    height: 25px;
+    border-radius: 0px;
+    left: -5px;
+    width: 45px;
+    display: none;
 }
 
 div.player__disk {
@@ -403,12 +412,6 @@ div.player__disk--two {
 i.fa-chevron-down-color2 {
     color: var(--green);
 }
-
-/* div.game_container::before, 
-div.game_container::after {
-    display: none;
-} */
-
 
 div.invictus {
     border-radius: 0.5rem;
@@ -491,5 +494,60 @@ div.message_area {
 
     div.player__name--two {
         grid-area: right;
+    }
+
+    div.reset_desktop {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 20px;
+        background-color: white;
+        border-radius: 0 0 5px 5px;
+        border: 1px solid var(--light_green);
+        z-index: 500;
+        cursor: pointer;
+    }
+
+    div.reset_desktop__slider {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70px;
+        height: 10px;
+        background-color: var(--misc_blue);
+        border-radius: 1rem;
+    }
+
+    div.reset_desktop_slider--animating {
+        animation: slide 1s;
+    }
+
+    @keyframes slide {
+        0% {
+            left: 50%;
+        }
+        80% {
+            left: 55%;
+        }
+        100% {
+            left: 50%;
+        }
+    }
+
+    div#col_0 {
+        border-radius: 10px 0 0 0;
+    }
+
+    div#col_6 {
+        border-radius: 0 10px 0 0;
+    }
+
+    div.game__col {
+        cursor: pointer;
+    }
+
+    div.disk--blank--first::before {
+        display: block;
     }
 }
