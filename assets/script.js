@@ -205,6 +205,11 @@ const lig_4 = {
     verify() {    
         let array = lig_4.matrix.path
         let won = false;
+        let player = {
+            name: null,
+            two: false
+        }
+
         // Horizontal
         for (let i = 0; i < array.length; i++) {
             for (let j = 0; j < array[i].length - 3; j++) {
@@ -217,12 +222,11 @@ const lig_4 = {
                     array[i][j] === array[i][j+3]){
                     won = true;
                     if(array[i][j] === '1') {
-                        const player1 = document.getElementById('inputUm').value;
-                        result(player1, 'invictu1');
+                        player.name = document.getElementById('inputUm').value;
                     }
                     else {
-                        const player2 = document.getElementById('inputDois').value;
-                        result(player2, 'invictu2');
+                        player.name = document.getElementById('inputDois').value;
+                        player.two = true
                     }
                 }
             }
@@ -239,12 +243,11 @@ const lig_4 = {
                     array[i][j] === array[i+3][j]){
                     won = true;
                     if(array[i][j] === '1') {
-                        const player1 = document.getElementById('inputUm').value;
-                        result(player1, 'invictu1');
+                        player.name = document.getElementById('inputUm').value;
                     }
                     else {
-                        const player2 = document.getElementById('inputDois').value;
-                        result(player2, 'invictu2');
+                        player.name = document.getElementById('inputDois').value;
+                        player.two = true
                     }
                 }
             } 
@@ -262,12 +265,11 @@ const lig_4 = {
                     array[i][j] === array[i+3][j+3]){ 
                     won = true; 
                     if(array[i][j] === '1') {
-                        const player1 = document.getElementById('inputUm').value;
-                        result(player1, 'invictu1');
+                        player.name = document.getElementById('inputUm').value;
                     }
                     else {
-                        const player2 = document.getElementById('inputDois').value;
-                        result(player2, 'invictu2');
+                        player.name = document.getElementById('inputDois').value;
+                        player.two = true
                     }
                 }
             }
@@ -285,12 +287,11 @@ const lig_4 = {
                     array[i][j] === array[i-3][j+3]){
                     won = true; 
                     if(array[i][j] === '1') {
-                        const player1 = document.getElementById('inputUm').value;
-                        result(player1, 'invictu1');
+                        player.name = document.getElementById('inputUm').value;
                     }
                     else {
-                        const player2 = document.getElementById('inputDois').value;
-                        result(player2, 'invictu2');
+                        player.name = document.getElementById('inputDois').value;
+                        player.two = true
                     }
                 }
             }
@@ -300,52 +301,31 @@ const lig_4 = {
             const cols = [...document.querySelectorAll('div.game__col')].map(col => col.children).filter(col => col.length !== 7)
 
             if (!cols.length) {
-                result2('noWay');
+                this.win.set_winner(false, false, true)
             }
-        }
+        } else this.win.set_winner(player.name, player.two)
+    },
+    win: {
+        set_winner(player_name, player_two=false, tie=false) {
+            const victory = document.querySelector('div.message_area');
+            const conquer = document.createElement('div');
 
+            conquer.classList.add('invictus');
+            if (player_name) conquer.innerText = `${player_name} venceu!`;
+            if (player_two) conquer.classList.add('invictus2')
+            if (tie) conquer.innerText = 'Empate!'
+            victory.innerHTML = ''
+            victory.appendChild(conquer);
+            victory.classList.remove('hidden')
+            setTimeout( _ => {
+                victory.classList.add('hidden')
+                lig_4.reset()
+            }, 4000)
+        }
     }
 }
 
 //André
-
-//Mensagem de vitória:
-
-const winner = (player, classList) => {
-    const victory = document.querySelector('div.container');
-    const conquer = document.createElement('div');
-    conquer.classList = 'invictus';
-    conquer.id = 'hideMeOnTime';
-    conquer.classList.add(classList);
-    conquer.innerHTML = `${player} venceu!`;
-    victory.appendChild(conquer);
-};
-const result = (player, classList) => {
-    setTimeout(() => { 
-        winner(player, classList); 
-    }, 1000);
-    setTimeout (() => {
-        document.getElementById('hideMeOnTime').style.display = 'none';
-    }, 10000);
-}
-
-const tie = (classList) => {
-    const victory = document.querySelector('div.container');
-    const conquer = document.createElement('div');
-    conquer.classList = 'invictus';
-    conquer.id = 'hideMeOnTime';
-    conquer.classList.add(classList);
-    conquer.innerText = "EMPATE!!!";
-    victory.appendChild(conquer);
-};
-const result2 = (classList) => {
-    setTimeout(() => { 
-        tie(classList); 
-    }, 1000);
-    setTimeout (() => {
-        document.getElementById('hideMeOnTime').style.display = 'none';
-    }, 10000);
-}
 
 lig_4.start()
 
