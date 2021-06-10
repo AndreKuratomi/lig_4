@@ -232,7 +232,7 @@ const lig_4 = {
             }
         }
         // Vertical
-        for (let i = 0; i < array.length - 2; i++) { 
+        for (let i = 0; i < array.length - 3; i++) { 
             for (let j = 0; j < array[i].length; j++) {
                 if (array[i][j] !== " "
                     &&
