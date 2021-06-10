@@ -4,6 +4,7 @@ const lig_4 = {
     player_1: '1',
     player_2: '2',
     column: 3,
+    reseting: false,
     matrix: {
         path: null,
         start() {
@@ -12,6 +13,7 @@ const lig_4 = {
     },
     start() {
         const reset = document.querySelector('button.reset__button')
+        const desktop_reset = document.querySelector('div.reset_desktop')
 
         this.matrix.start()
         this.animations.start()
@@ -19,11 +21,19 @@ const lig_4 = {
         this.input.start()
         this.controller.start()
         reset.addEventListener('click', this.reset.bind(this))
+        desktop_reset.addEventListener('click', _ => {
+            const slider = desktop_reset.children[0]
+
+            this.animations.disk.drop_disks()
+            slider.classList.add('reset_desktop_slider--animating')
+            setTimeout( _ => slider.classList.remove('reset_desktop_slider--animating'), 1000)
+        })
     },
     reset() {
         const cols = [...document.querySelectorAll('div.game__col')]
         const arrow = document.querySelector('i.fa-chevron-down')
 
+        this.reseting = true
         this.input.error_id = null
         this.column = 3
         cols.forEach(col => col.innerHTML = '')
@@ -31,6 +41,7 @@ const lig_4 = {
         this.controller.render(arrow)
         this.disks.start()
         this.matrix.start()
+        this.reseting = false
     },
 // André,
     controller: {
@@ -166,6 +177,7 @@ const lig_4 = {
                 let total_el = 0
                 const len = cols.length
 
+                lig_4.reseting = true
                 // await new Promise(r => setTimeout(r, 100))
                 for (let i = 0; i < len; i++) {
                     const col = cols[i]
@@ -229,7 +241,7 @@ const lig_4 = {
             const seta = document.querySelector('i.fa-chevron-down')
             let y_axis = 0
 
-            if (col.children.length < 6 + 1) {
+            if (col.children.length < 6 + 1 && !lig_4.reseting) {
                 const disk = document.createElement('div')
                 let cur_player = '1'
 
