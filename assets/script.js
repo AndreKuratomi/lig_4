@@ -1,3 +1,5 @@
+const rand_in_range = (min, max) => Math.floor(Math.random() * (max + 1)) + min
+
 const lig_4 = {
     player_1: '1',
     player_2: '2',
@@ -145,6 +147,41 @@ const lig_4 = {
                     disk.classList.remove('player__disk--animating')
                     disk.style.top = `${0}px`
                 }, 500)
+            }, 
+            async drop_disks() {
+                let cols = [...document.querySelectorAll('div.game__col')].map(col => [...col.children].filter(el => el.classList.contains('player__disk')))
+                let total_el = 0
+                const len = cols.length
+
+                // await new Promise(r => setTimeout(r, 100))
+                for (let i = 0; i < len; i++) {
+                    const col = cols[i]
+
+                    for (let j = 0; j < col.length; j++) {
+                        const el = col[j]
+                        total_el++
+
+                        el.style.top = `${47 * (5 - j) + 40}px`
+                        el.style.left = '50%'
+                        el.style.position = 'absolute'
+                        el.style.transform = 'translate(-50%, 0)'
+                    }
+                }
+
+                for (let i = 0; i < len; i++) {
+                    const index = rand_in_range(0, cols.length - 1)
+                    const col = cols[index]
+
+                    for (let j = 0; j < col.length; j++) {
+                        const el = col[j]
+
+                        setTimeout( _ => el.classList.add('player__disk--animating--drop'))
+                        await new Promise(r => setTimeout(r, 100))
+                    }
+                    cols.splice(index, 1)
+                }
+                await new Promise(r => setTimeout(r, (total_el - 1) / 2 * 3 + 1000 * (total_el >= 1)))
+                lig_4.reset()
             }
         },
         start() {
@@ -166,6 +203,8 @@ const lig_4 = {
                     const el = document.createElement('div')
 
                     el.classList.add('disk--blank')
+                    if (container.children.length === 6) 
+                        el.classList.add('disk--blank--first')
                     container.appendChild(el)
                 }
                 col.innerHTML = ''
@@ -232,7 +271,7 @@ const lig_4 = {
             }
         }
         // Vertical
-        for (let i = 0; i < array.length - 2; i++) { 
+        for (let i = 0; i < array.length - 3; i++) { 
             for (let j = 0; j < array[i].length; j++) {
                 if (array[i][j] !== " "
                     &&

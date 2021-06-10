@@ -313,7 +313,7 @@ div.disk--blank {
     position: relative;
 }
 
-div.disk--blank::after {
+div.disk--blank::after, div.disk--blank--first::before {
     content: '';
     width: 45px;
     height: 10px;
@@ -323,6 +323,12 @@ div.disk--blank::after {
     left: -4px;
     top: -10px;
     z-index: 100;
+}
+
+div.disk--blank--first::before {
+    top: 100%;
+    height: 16px;
+    border-radius: 5px;
 }
 
 div.player__disk {
@@ -336,7 +342,7 @@ div.player__disk {
     /* animation: insert 1s; */
 }
 
-div.player__disk--animating {
+div.player__disk--animating, div.player__disk--animating--drop {
     position: absolute;
     top: 0;
     left: 50%;
@@ -344,6 +350,21 @@ div.player__disk--animating {
     transition: all 0.5s ease;
 }
 
+div.player__disk--animating--drop {
+    animation: drop_down 2s forwards;
+}
+
+@keyframes drop_down {
+    0% {
+        opacity: 1;
+    }
+    70%, 100% {
+        opacity: 0;
+    }
+    100% {
+        top: 450px;
+    }
+}
 
 /* @keyframes insert {
     0% {
