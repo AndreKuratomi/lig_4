@@ -46,6 +46,53 @@ const lig_4 = {
         this.reseting = false
     },
 // André,
+    soundEffects: {
+        // clickSound() {
+        //     let click = document.createElement("audio");
+        //     if (click.canPlayType("audio/mpeg")) {
+        //         click.setAttribute("src", "./assets/soundEffects/button-click.mp3")
+        //     }
+        
+        //     click.play();
+        // },
+        singleFallingChipSound() {
+            let chip = document.createElement("audio");
+            if (chip.canPlayType("audio/mpeg")) {
+                chip.setAttribute("src","./assets/soundEffects/single-falling-chip.mp3")
+            }
+        
+            chip.play();
+        },
+        
+        fallingChipsSound() {
+            let chips = document.createElement("audio");
+            if (chips.canPlayType("audio/mpeg")) {
+                chips.setAttribute("src","./assets/soundEffects/falling-chips.mp3")
+            }
+    
+            chips.play();
+            return chips;
+        },
+        
+        victorySound() {
+            let honor = document.createElement("audio");
+            if (honor.canPlayType("audio/mpeg")) {
+                honor.setAttribute("src","./assets/soundEffects/victory.mp3")
+            }
+        
+            honor.play();
+        },
+        
+        tieSound() {
+            let tie = document.createElement("audio");
+            if (tie.canPlayType("audio/mpeg")) {
+                tie.setAttribute("src","./assets/soundEffects/tie-music.mp3")
+            }
+        
+            tie.play();
+        }
+        
+    },
     controller: {
         start() {
             const button_area = document.querySelector('div.button_area')
@@ -55,7 +102,7 @@ const lig_4 = {
             button_area.addEventListener('click', evt => {
                 const evt_target = evt.target;
                 let flag = false;
-                
+
                 if (evt_target.classList.contains('button--left')) {
                     if (lig_4.column > 0) {
                         lig_4.column -= 1;
@@ -212,7 +259,10 @@ const lig_4 = {
                 let cols = [...document.querySelectorAll('div.game__col')].map(col => [...col.children].filter(el => el.classList.contains('player__disk')))
                 let total_el = 0
                 const len = cols.length
-
+                let fall = lig_4.soundEffects.fallingChipsSound()
+                let chipsStore = setInterval(() => {
+                    fall = lig_4.soundEffects.fallingChipsSound()
+                }, 1000)
                 lig_4.reseting = true
                 lig_4.win.has_winner = false
                 for (let i = 0; i < len; i++) {
@@ -242,6 +292,8 @@ const lig_4 = {
                     cols.splice(index, 1)
                 }
                 await new Promise(r => setTimeout(r, (total_el - 1) / 2 * 3 + 1000 * (total_el >= 1)))
+                clearInterval(chipsStore)
+                fall.pause()
                 lig_4.reset()
             }
         },
@@ -295,6 +347,7 @@ const lig_4 = {
                 }
                 lig_4.matrix.path[--y_axis][lig_4.column] = cur_player
                 lig_4.animations.disk.animate(disk, y_axis)
+                setTimeout(() => {lig_4.soundEffects.singleFallingChipSound();}, 500)
 
                 return true
             }
@@ -413,22 +466,25 @@ const lig_4 = {
         set_winner(player_name, player_two=false, tie=false) {
             const victory = document.querySelector('div.message_area');
             const conquer = document.createElement('div');
+            let bah
    
             conquer.classList.add('invictus');
             if (player_name) conquer.innerText = `${player_name} venceu!`;
             if (player_two) conquer.classList.add('invictus2')
-            if (tie) conquer.innerText = 'Empate!'
-            victory.innerHTML = ''
-            victory.appendChild(conquer);
-            victory.classList.remove('hidden')
-            if (!this.has_winner)
+            if ((player_name || player_two) && !this.has_winner) bah = lig_4.soundEffects.victorySound()
+            if (tie && !this.has_winner) {
+                conquer.innerText = 'Empate!'
+                conquer.style.backgroundColor = "#F44336"
+                bah = lig_4.soundEffects.tieSound()
+            }
+            if (!this.has_winner) {
+                victory.innerHTML = ''
+                victory.appendChild(conquer);
+                victory.classList.remove('hidden')
                 setTimeout( _ => {
                     victory.classList.add('hidden')
-                }, 4000)
-            else
-                setTimeout( _ => {
-                    victory.classList.add('hidden')
-                }, 2000)
+                }, 4500)
+            }
 
             this.has_winner = true
         },
@@ -439,52 +495,6 @@ const lig_4 = {
 }
 
 //André
-function clickSound() {
-    let click = document.createElement("audio");
-    if (click.canPlayType("audio/mpeg")) {
-        click.setAttribute("src", "./assets/soundEffects/button-click.mp3")
-    }
-
-    click.play();
-}
-// console.log(clickSound())
-
-function fallingChipsSound() {
-    let chips = document.createElement("audio");
-    if (chips.canPlayType("audio/mpeg")) {
-        chips.setAttribute("src","./assets/soundEffects/falling-chips.mp3")
-    }
-
-    chips.play();
-}
-
-
-function singleChipFallingSound() {
-    let chip = document.createElement("audio");
-    if (chip.canPlayType("audio/mpeg")) {
-        chip.setAttribute("src","./assets/soundEffects/single-falling-chip.mp3")
-    }
-
-    chip.play();
-}
-
-function victorySound() {
-    let honor = document.createElement("audio");
-    if (honor.canPlayType("audio/mpeg")) {
-        honor.setAttribute("src","./assets/soundEffects/victory.mp3")
-    }
-
-    honor.play();
-}
-
-function tieSound() {
-    let tie = document.createElement("audio");
-    if (tie.canPlayType("audio/mpeg")) {
-        tie.setAttribute("src","./assets/soundEffects/tie-music.mp3")
-    }
-
-    tie.play();
-}
 
 
 lig_4.start()
