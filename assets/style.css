@@ -474,6 +474,7 @@ div.message_area {
         background-size: 80%;
         background-repeat: no-repeat;
         top: 50px;
+        z-index: -1;
     }
 
     div.game_container::before {
