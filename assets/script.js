@@ -439,6 +439,53 @@ const lig_4 = {
 }
 
 //André
+function clickSound() {
+    let click = document.createElement("audio");
+    if (click.canPlayType("audio/mpeg")) {
+        click.setAttribute("src", "./assets/soundEffects/button-click.mp3")
+    }
+
+    click.play();
+}
+// console.log(clickSound())
+
+function fallingChipsSound() {
+    let chips = document.createElement("audio");
+    if (chips.canPlayType("audio/mpeg")) {
+        chips.setAttribute("src","./assets/soundEffects/falling-chips.mp3")
+    }
+
+    chips.play();
+}
+
+
+function singleChipFallingSound() {
+    let chip = document.createElement("audio");
+    if (chip.canPlayType("audio/mpeg")) {
+        chip.setAttribute("src","./assets/soundEffects/single-falling-chip.mp3")
+    }
+
+    chip.play();
+}
+
+function victorySound() {
+    let honor = document.createElement("audio");
+    if (honor.canPlayType("audio/mpeg")) {
+        honor.setAttribute("src","./assets/soundEffects/victory.mp3")
+    }
+
+    honor.play();
+}
+
+function tieSound() {
+    let tie = document.createElement("audio");
+    if (tie.canPlayType("audio/mpeg")) {
+        tie.setAttribute("src","./assets/soundEffects/tie-music.mp3")
+    }
+
+    tie.play();
+}
+
 
 lig_4.start()
 
