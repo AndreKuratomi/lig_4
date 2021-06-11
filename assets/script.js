@@ -90,17 +90,16 @@ const lig_4 = {
             const soundsMusic = document.getElementById('sounds');
             const bossaNova = document.getElementById('bossaNova');
 
-            soundsMusic.addEventListener('click', function(){
+            soundsMusic.addEventListener('click', _ => {
                 bossaNova.classList.toggle("bossaNova");
                 soundsMusic.classList.toggle('button--bar')
 
-                if(bossaNova.classList.contains('bossaNova')){
-                this.pauseAudio(bossaNova)
+                if (bossaNova.classList.contains('bossaNova')) {
+                    this.pauseAudio(bossaNova)
                 }
-                else{
-                this.playAudio(bossaNova)
+                else {
+                    this.playAudio(bossaNova)
                 }
-
             });
 
         },
