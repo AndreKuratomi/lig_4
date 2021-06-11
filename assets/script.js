@@ -21,6 +21,7 @@ const lig_4 = {
         this.input.start()
         this.controller.start()
         this.fullscreen.start()
+        this.miniMenu.start()
         reset.addEventListener('click', this.reset.bind(this))
         desktop_reset.addEventListener('click', _ => {
             const slider = desktop_reset.children[0]
@@ -45,7 +46,6 @@ const lig_4 = {
         this.win.reset()
         this.reseting = false
     },
-// André,
     soundEffects: {
         singleFallingChipSound() {
             let chip = document.createElement("audio");
@@ -84,6 +84,33 @@ const lig_4 = {
             tie.play();
         }
         
+    },
+    miniMenu:{
+        start(){
+            const soundsMusic = document.getElementById('sounds');
+            const bossaNova = document.getElementById('bossaNova');
+
+            soundsMusic.addEventListener('click', function(){
+                bossaNova.classList.toggle("bossaNova");
+                soundsMusic.classList.toggle('button--bar')
+
+                if(bossaNova.classList.contains('bossaNova')){
+                this.pauseAudio(bossaNova)
+                }
+                else{
+                this.playAudio(bossaNova)
+                }
+
+            });
+
+        },
+        playAudio(bossaNova) { 
+            bossaNova.play(); 
+        },
+        
+        pauseAudio(bossaNova) { 
+            bossaNova.pause(); 
+        }
     },
     controller: {
         start() {
@@ -134,7 +161,6 @@ const lig_4 = {
             seta.style.left = `${lig_4.column * 50}px`;
         }
     },
-// Gabriel,
     input: {
         error_id: null,
         get_names() {
@@ -489,13 +515,6 @@ const lig_4 = {
     }
 }
 
-//André
-
-
 lig_4.start()
 
-//Gabriel
 
-
-
-//Lucas
