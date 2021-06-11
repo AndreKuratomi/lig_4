@@ -12,12 +12,12 @@
     </head>
     <body>
         <div class="full_container">
-            <!-- Header -->
             <header>
                 <h1>CONNECT-FOUR</h1>
                 <div id="button__area--header">
                     <button class="button--header" id="fullscreen"><i class="fas fa-expand-arrows-alt"></i></button>
-                    <button class="button--header" id="sounds"><i class="fas fa-music"></i></button>
+                    <button class="button--header button--bar" id="sounds"><i class="fas fa-music"></i></button>
+                    <audio class="bossaNova" id="bossaNova" src="./assets/soundEffects/Bossa Nova Jazz Instrumentals - 2014 - Full Album_50k.mp3" loop></audio>
                 </div>
             </header>
             <section>
@@ -30,7 +30,6 @@
                     <p class="input__error_msg input__error_msg-hidden">Nome de jogador inválido</p>
                 </form>
             </section>
-            <!-- Main -->
             <main>
                 <div class="container hidden">
                     <i class="fas fa-chevron-down"></i>
