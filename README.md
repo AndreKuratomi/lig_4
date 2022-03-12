@@ -1,7 +1,6 @@
 ## LIG-04
 
 - [Descrição](#descrição)
-- [Instalação](#instalação)
 - [Utilização](#utilização)
 - [Termos de uso](#termos-de-uso)
 
